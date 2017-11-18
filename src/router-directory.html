@@ -1,0 +1,66 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+<dom-module id="router-directory">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    
+  </template>
+  <script>
+    class RouterDirectory extends Polymer.Element {
+      static get is() {return 'router-directory'};
+      static get properties() {
+        return {
+          page: {
+            type: String
+          },
+          uriRoute: {
+            type: String,
+            notify: true
+          }
+        }
+      }
+      static get observers() {
+        return [
+          '_pathChanged(page)'
+        ]
+      }
+      constructor() {
+        super();
+        
+        this.set('directory', {
+          demo: '/src/demo-page.html',
+          seller: '/src/containers/seller-view.html',
+          user: '/src/containers/user-view.html'
+        })
+      }
+      ready() {
+        super.ready();
+      }
+
+      /*
+        Observadores
+      */
+      _pathChanged(page) {
+        if ( page ) this.set('uriRoute', this.directory[page] || 'page-not-found.html');
+      }
+      /*
+        Handlers
+      */
+
+      /*
+        Listeners
+      */
+
+      /*
+        Métodos Internos
+      */
+
+    }
+
+    window.customElements.define(RouterDirectory.is, RouterDirectory);
+  </script>
+</dom-module>

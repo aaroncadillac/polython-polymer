@@ -1,0 +1,63 @@
+<link rel="import" href="../..//custom-style/materialize.html">
+<link rel="import" href="../../../../bower_components/login-fire/login-fire.html">
+
+
+<dom-module id="login-container">
+  <template>
+    <style include="polython-material">
+      :host {
+        display: block;
+      }
+    </style>
+    <firebase-app name="miniHorizontalWideDemo" api-key="AIzaSyAhoCXxkY-ffNwA_7L7HIwBVpASYj1btNE" auth-domain="convoo-login-demo.firebaseapp.com" database-url="https://convoo-login-demo.firebaseio.com">
+    </firebase-app>
+    <login-fire mini horizontal email-password anonymous google facebook app-name="miniHorizontalWideDemo"></login-fire>
+    
+  </template>
+  <script>
+    class LoginContainer extends Polymer.Element {
+      static get is() {return 'login-container'};
+      static get properties() {
+        return {
+          
+        }
+      }
+      static get observers() {
+        return [
+
+        ]
+      }
+      constructor() {
+        super();
+        //costructor content
+      }
+      ready() {
+        super.ready();
+        //ready content
+      }
+      connectedCallback() {
+        super.connectedCallback();
+        //connectedCallback content
+      }
+
+      /*
+        Observadores
+      */
+
+      /*
+        Handlers
+      */
+
+      /*
+        Listeners
+      */
+
+      /*
+        Métodos Internos
+      */
+
+    }
+
+    window.customElements.define(LoginContainer.is, LoginContainer);
+  </script>
+</dom-module>

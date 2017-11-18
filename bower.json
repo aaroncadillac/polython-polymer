@@ -21,7 +21,8 @@
     "app-menu": "^2.1.0",
     "iron-icons": "^2.0.1",
     "paper-card": "PolymerElements/paper-card#^2.0.0",
-    "iron-list": "^2.0.11"
+    "iron-list": "^2.0.11",
+    "login-fire": "convoo/login-fire#^0.1.5"
   },
   "resolutions": {
     "polymer": "^2.0.0"

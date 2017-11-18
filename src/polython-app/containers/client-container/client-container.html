@@ -1,0 +1,57 @@
+
+<dom-module id="user-container">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    
+  </template>
+  <script>
+    class UserContainer extends Polymer.Element {
+      static get is() {return 'user-container'};
+      static get properties() {
+        return {
+          
+        }
+      }
+      static get observers() {
+        return [
+
+        ]
+      }
+      constructor() {
+        super();
+        //costructor content
+      }
+      ready() {
+        super.ready();
+        //ready content
+      }
+      connectedCallback() {
+        super.connectedCallback();
+        //connectedCallback content
+      }
+
+      /*
+        Observadores
+      */
+
+      /*
+        Handlers
+      */
+
+      /*
+        Listeners
+      */
+
+      /*
+        Métodos Internos
+      */
+
+    }
+
+    window.customElements.define(UserContainer.is, UserContainer);
+  </script>
+</dom-module>

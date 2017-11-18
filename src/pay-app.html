@@ -1,4 +1,5 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
+<!-- App Elements -->
 <link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
 <link rel="import" href="../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
 <link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
@@ -7,11 +8,20 @@
 <link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
 <link rel="import" href="../bower_components/app-route/app-location.html">
 <link rel="import" href="../bower_components/app-route/app-route.html">
+<link rel="import" href="../bower_components/app-menu/app-menu.html">
+<link rel="import" href="../bower_components/app-menu/app-menu-icon-item.html">
+<!-- Iron Elements -->
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
-<link rel="import" href="../bower_components/iron-selector/iron-selector.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../bower_components/iron-icons/social-icons.html">
+<!-- Paper Elements -->
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-styles/color.html">
+<!-- Own Elements -->
 <link rel="import" href="./router-directory.html">
 
+<!-- Pages Lazy Load -->
 <link rel="lazy-import" href="./demo-page.html">
 <link rel="lazy-import" href="./page-not-found.html">
 <link rel="lazy-import" href="./container/user-view.html">
@@ -21,8 +31,9 @@
   <template>
     <style>
       :host {
-        --app-primary-color: #4285f4;
-        --app-secondary-color: black;
+        --app-primary-color: #2196F3;
+        --app-secondary-color: #757575;
+        --app-accent-color: #FF5252;
 
         display: block;
       }
@@ -56,6 +67,13 @@
         color: black;
         font-weight: bold;
       }
+
+      .login-button {
+        background-color: var(--paper-red-400)
+      }
+      app-toolbar {
+        line-height: 1rem;
+      }
     </style>
 
     <app-location
@@ -75,21 +93,29 @@
     <app-drawer-layout fullbleed narrow="{{narrow}}">
       <!-- Drawer content -->
       <app-drawer id="drawer" slot="drawer" swipe-open="[[narrow]]">
-        <app-toolbar>Menu</app-toolbar>
-        <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
-          <a name="demo" href="[[rootPath]]">Incio</a>
-          <a name="user" href="[[rootPath]]user">Usuarios</a>
-          <a name="seller" href="[[rootPath]]seller">Vendedores</a>
-        </iron-selector>
+        <app-toolbar>
+          <div main-title>Pay App</div>
+        </app-toolbar>
+        <app-menu selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
+          <a name="demo" href="[[rootPath]]">
+            <app-menu-icon-item icon="home">Incio</app-menu-icon-item></a>
+          <a name="user" href="[[rootPath]]user">
+            <app-menu-icon-item icon="social:person">Usuarios</app-menu-icon-item></a>
+          <a name="seller" href="[[rootPath]]seller">
+            <app-menu-icon-item icon="store">Vendedores</app-menu-icon-item></a>
+        </app-menu>
       </app-drawer>
 
       <!-- Main content -->
       <app-header-layout has-scrolling-region>
 
-        <app-header slot="header" condenses reveals effects="waterfall">
+        <app-header slot="header" condenses effects="waterfall">
           <app-toolbar>
             <paper-icon-button icon="my-icons:menu" drawer-toggle></paper-icon-button>
-            <div main-title>My App</div>
+            <div main-title>Pay App</div>
+            <div>
+              <paper-button raised class="login-button">Iniciar Sesión</paper-button>
+            </div>
           </app-toolbar>
         </app-header>
 

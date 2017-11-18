@@ -1,0 +1,53 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="user-view">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    User View
+  </template>
+  <script>
+    class UserView extends Polymer.Element {
+      static get is() {return 'user-view'};
+      static get observers() {
+        return [
+
+        ]
+      }
+      constructor() {
+        super();
+        //costructor content
+      }
+      ready() {
+        super.ready();
+        //ready content
+      }
+      connectedCallback() {
+        super.connectedCallback();
+        //connectedCallback content
+      }
+
+      /*
+        Observadores
+      */
+
+      /*
+        Handlers
+      */
+
+      /*
+        Listeners
+      */
+
+      /*
+        Métodos Internos
+      */
+
+    }
+
+    window.customElements.define(UserView.is, UserView);
+  </script>
+</dom-module>

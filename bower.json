@@ -24,7 +24,11 @@
     "iron-list": "^2.0.11",
     "gold-cc-cvc-input": "PolymerElements/gold-cc-cvc-input#^2.0.1",
     "gold-cc-input": "PolymerElements/gold-cc-input#^2.0.0",
-    "paper-listbox": "^2.0.0"
+    "paper-listbox": "^2.0.0",
+    "paper-item": "^2.0.0",
+    "paper-datatable-api": "^2.0.10",
+    "paper-dialog": "^2.0.0",
+    "granite-qrcode-scanner": "LostInBrittany/granite-qrcode-scanner#^1.6.0"
   },
   "resolutions": {
     "polymer": "^2.0.0"

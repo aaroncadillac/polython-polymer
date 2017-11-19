@@ -1,0 +1,87 @@
+<!-- Link imports -->
+
+
+<dom-module id="card-info">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <div class="row">
+      <div class="col s12 m10 offset-m1">
+        <paper-card elevation="1" animated-shadow>
+          <app-toolbar class="card-toolbar">
+            <div main-title><span class="flow-text">[[header]]</span></div>
+          </app-toolbar>
+          <template is="dom-if" if="headerActions"></template>
+          <div class="card-content">
+            <div class="row s12">
+              <paper-input label="Nombre"></paper-input>
+            </div>
+            <div class="row s12">
+              <paper-input label="Usuario"></paper-input>
+            </div>
+            <div class="row s12">
+              <paper-input label="Telefono"></paper-input>
+            </div>
+            <div class="row s12">
+              <paper-input label="Contraseña"></paper-input>
+            </div>
+          </div>
+          <div class="card-actions">
+            <paper-button class="card-action-confirm" raised>Modificar</paper-button>
+          </div>
+        </paper-card
+      </div>
+    </div>
+  </template>
+  <script>
+    class CardInfo extends Polymer.Element {
+      static get is() {return 'card-info'};
+      static get properties() {
+        return {
+          header: {
+            type: String
+          }
+        }
+      }
+      static get observers() {
+        return [
+
+        ]
+      }
+      constructor() {
+        super();
+        //costructor content
+      }
+      ready() {
+        super.ready();
+        //ready content
+      }
+      connectedCallback() {
+        super.connectedCallback();
+        //connectedCallback content
+      }
+
+      /*
+        Observadores
+      */
+
+      /*
+        Handlers
+      */
+
+      /*
+        Listeners
+      */
+
+      /*
+        Métodos Internos
+      */
+
+    }
+
+    window.customElements.define(CardInfo.is, CardInfo);
+  </script>
+</dom-module>

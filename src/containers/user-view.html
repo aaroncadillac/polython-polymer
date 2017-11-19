@@ -8,6 +8,8 @@
 <!-- Iron Elements -->
 <link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
 <link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
+<!-- Granite Elements -->
+<link rel="import" href="../../bower_components/granite-qrcode-scanner/granite-qrcode-scanner.html">
 <!-- Own Elements -->
 <link rel="import" href="../custom-styles/materialize-styles.html">
 
@@ -34,7 +36,7 @@
         padding: 10px;
         box-sizing: border-box;
       }
-      .item {
+      paper-item {
         @apply --layout-horizontal;
         padding: 20px;
         background-color: white;
@@ -62,25 +64,25 @@
         display: none;
       }
 
-      .item:hover .shortText::after {
+      paper-item:hover .shortText::after {
         content: ' [+]';
         color: gray;
       }
 
-      .item.expanded:hover .shortText::after {
+      paper-item[active]:hover .shortText::after {
         content: '';
       }
 
-      .item.expanded .longText {
+      paper-item[active] .longText {
         display: block;
       }
 
-      .item.expanded:hover .longText::after {
+      paper-item[active]:hover .longText::after {
         content: ' [–]';
       }
     </style>
-    <div class="row">
-      <div class="col s10 offset-s1">
+    <div class="row hide-on-med-and-down">
+      <div class="col l10 offset-l1">
         <paper-card elevation="1" animated-shadow>
           <app-toolbar class="card-toolbar">
             <div main-title><span class="flow-text">Administrar Perfil</span></div>
@@ -109,18 +111,16 @@
             <div main-title><span class="flow-text">Administrar mis métodos de pago</span></div>
           </app-toolbar>
           <div class="card-content">
-            <paper-listbox id="list">
+            <paper-listbox id="list" selectedItem="{{cardSelected}}">
               <template is="dom-repeat" items="[[items]]">
-                <div>
-                  <div class$="[[getClassForItem(item, selected)]]" tabindex$="[[tabIndex]]">
-                    <iron-icon icon="payment" slot="prefix"></iron-icon>
-                    <div class="pad">
-                      <div class="primary">[[item.name]]</div>
-                      <div class="shortText">[[item.shortText]]</div>
-                      <div class="longText">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad officiis eligendi soluta in id dolorum accusamus, autem quasi quisquam, non, repudiandae error adipisci sed minima et aliquam doloribus consequatur repellat!</div>
-                    </div>
+                <paper-item on-click="toggleItem">
+                  <iron-icon icon="payment" slot="prefix"></iron-icon>
+                  <div class="pad">
+                    <div class="primary">[[item.name]]</div>
+                    <div class="shortText">[[item.shortText]]</div>
+                    <div class="longText">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad officiis eligendi soluta in id dolorum accusamus, autem quasi quisquam, non, repudiandae error adipisci sed minima et aliquam doloribus consequatur repellat!</div>
                   </div>
-                </div>
+                </paper-item>
               </template>
             </paper-listbox>
           </div>
@@ -128,6 +128,16 @@
             <paper-button class="card-action-confirm" raised>Agregar tarjeta</paper-button>
           </div>
         </paper-card>
+      </div>
+    </div>
+    <div class="row show-on-medium-and-down">
+      <div class="col s12">
+       <dom-bind>
+         <template>
+            <granite-qrcode-scanner data="{{data}}" active="{{activeQR}}" continuous></granite-qrcode-scanner>
+            <p>Datos: [[data]]</p>
+         </template>
+       </dom-bind>
       </div>
     </div>
   </template>
@@ -143,6 +153,7 @@
           {name: 'VISA', shortText: 'Terminación 3458'},
           {name: 'AMEX', shortText: 'Terminación 0291'}
         ])
+        this.set('activeQR', true)
       }
       ready() {
         super.ready();
@@ -164,6 +175,9 @@
       /*
         Listeners
       */
+      toggleItem() {
+        this.cardSelected.active = !!!this.cardSelected.active
+      }
 
       /*
         Métodos Internos

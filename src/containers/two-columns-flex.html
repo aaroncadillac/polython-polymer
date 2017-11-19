@@ -1,0 +1,59 @@
+<!-- Link imports -->
+
+
+<dom-module id="two-columns-flex">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    
+  </template>
+  <script>
+    class TwoColumnsFlex extends Polymer.Element {
+      static get is() {return 'two-columns-flex'};
+      static get properties() {
+        return {
+           
+        }
+      }
+      static get observers() {
+        return [
+
+        ]
+      }
+      constructor() {
+        super();
+        //costructor content
+      }
+      ready() {
+        super.ready();
+        //ready content
+      }
+      connectedCallback() {
+        super.connectedCallback();
+        //connectedCallback content
+      }
+
+      /*
+        Observadores
+      */
+
+      /*
+        Handlers
+      */
+
+      /*
+        Listeners
+      */
+
+      /*
+        Métodos Internos
+      */
+
+    }
+
+    window.customElements.define(TwoColumnsFlex.is, TwoColumnsFlex);
+  </script>
+</dom-module>

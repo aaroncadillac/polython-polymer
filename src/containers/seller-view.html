@@ -1,7 +1,14 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../../bower_components/paper-card/paper-card.html">
 <link rel="import" href="../../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../../bower_components/iron-icons/editor-icons.html">
+<link rel="import" href="../../bower_components/paper-datatable-api/paper-datatable-api.html">
+<link rel="import" href="../../bower_components/paper-datatable-api/paper-datatable-api-column.html">
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../../bower_components/neon-animation/neon-animation.html">
 <link rel="import" href="../custom-styles/materialize-styles.html">
 <dom-module id="seller-view">
   <template>
@@ -17,21 +24,39 @@
             <div main-title>
               <span class="flow-text">Mis Tiendas</span>
             </div>
-            <paper-icon-button icon="add"></paper-icon-button>
+            <paper-icon-button icon="add" onclick="addStore.open()"></paper-icon-button>
           </app-toolbar>
           <div class="card-content">
-            <paper-listbox>
-              <template is="dom-repeat" items="[[items]]">
-                
-              </template>
-            </paper-listbox>
-          </div>
-          <div class="card-actions">
-            
+            <paper-datatable-api data="[[items]]">
+              <paper-datatable-api-column header="Nombre" property="name" other-properties='["id"]'>
+                <template>
+                  <edit-wrapper content-id="[[otherValues.id]]" value="[[value]]"></edit-wrapper>
+                </template>
+              </paper-datatable-api-column>
+              <paper-datatable-api-column header="Cantidad de productos" property="prodCount">
+                <template>
+                  <span>[[value]]</span>
+                </template>
+              </paper-datatable-api-column>
+              <paper-datatable-api-column property="id" class="right-align">
+                <template>
+                  <div class="right-align">
+                    <paper-icon-button icon="add-shopping-cart"></paper-icon-button>
+                  </div>
+                </template>
+              </paper-datatable-api-column>
+            </paper-datatable-api> 
           </div>
         </paper-card>
       </div>
     </div>
+    <paper-dialog id="addStore" entry-animation="scale-up-animation" exit-animation="fade-out-animation">
+      <p class="flow-text">Agregar tienda</p>
+      <paper-input label="Nombre" value={{newStore}}></paper-input>
+      <div class="buttons">
+        <paper-button dialog-confirm autofocus>Agregar</paper-button>
+      </div>
+    </paper-dialog>
   </template>
   <script>
     class SellerView extends Polymer.Element {
@@ -45,7 +70,12 @@
         super();
         
         this.set('items', [
-          {}
+          {id: 1, name: 'Tienda 1', prodCount: 10},
+          {id: 2, name: 'Tienda 2', prodCount: 23},
+          {id: 3, name: 'Tienda 3', prodCount: 12},
+          {id: 4, name: 'Tienda 4', prodCount: 45},
+          {id: 5, name: 'Tienda 5', prodCount: 22},
+          {id: 6, name: 'Tienda 6', prodCount: 13}
         ])
       }
       ready() {
@@ -76,5 +106,55 @@
     }
 
     window.customElements.define(SellerView.is, SellerView);
+  </script>
+</dom-module>
+
+<dom-module id="edit-wrapper">
+
+  <template>
+    <style include="iron-flex iron-flex-alignment"></style>
+
+    <div class="layout horizontal center">
+      <template is="dom-if" if="[[_edit]]">
+        <paper-input class="flex" no-label-float value="{{_tmpValue}}"></paper-input>
+        <paper-icon-button icon="paper-datatable-api-icons:check" value="[[value]]" on-tap="_validEdit"></paper-icon-button>
+      </template>
+      <template is="dom-if" if="[[!_edit]]">
+        <div class="flex">
+          [[value]]
+        </div>
+        <paper-icon-button icon="paper-datatable-api-icons:mode-edit" on-tap="_activeEdit"></paper-icon-button>
+      </template>
+    </div>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'edit-wrapper',
+      properties: {
+        value: {
+          type: String,
+        },
+        contentId: {
+          type: String,
+        },
+        _edit: {
+          type: Boolean,
+          value: false,
+        },
+        _tmpValue: String,
+      },
+      _activeEdit: function() {
+        this._tmpValue = this.value;
+        this._edit = true;
+      },
+      _validEdit: function () {
+        if (this._tmpValue !== this.value) {
+          this.value = this._tmpValue;
+          this.fire('edit-value', { value: this.value, id: this.contentId });
+        }
+        this._edit = false;
+      },
+    });
   </script>
 </dom-module>

@@ -33,6 +33,54 @@
       paper-card {
         margin-bottom: 30px;
       }
+      iron-list {
+        padding: 10px;
+        box-sizing: border-box;
+      }
+      .item {
+        @apply --layout-horizontal;
+        padding: 20px;
+        background-color: white;
+        border: 1px solid #ddd;
+        cursor: pointer;
+        margin-bottom: 10px;
+      }
+      .pad {
+        padding: 0 16px;
+        @apply --layout-flex;
+        @apply --layout-vertical);
+      }
+
+      .primary {
+        font-size: 16px;
+        font-weight: bold;
+      }
+
+      .shortText, .longText {
+        font-size: 14px;
+      }
+
+      .longText {
+        color: gray;
+        display: none;
+      }
+
+      .item:hover .shortText::after {
+        content: ' [+]';
+        color: gray;
+      }
+
+      .item.expanded:hover .shortText::after {
+        content: '';
+      }
+
+      .item.expanded .longText {
+        display: block;
+      }
+
+      .item.expanded:hover .longText::after {
+        content: ' [–]';
+      }
     </style>
     <div class="row">
       <div class="col s10 offset-s1">
@@ -61,8 +109,19 @@
             <div main-title><span class="flow-text">Administrar mis métodos de pago</span></div>
           </app-toolbar>
           <div class="card-content">
-            <iron-list>
-              
+            <iron-list id="list" items="[[items]]" selection-enabled multi-selection>
+              <template>
+                <div>
+                  <div class$="[[getClassForItem(item, selected)]]" tabindex$="[[tabIndex]]">
+                    <iron-icon icon="payment" slot="prefix"></iron-icon>
+                    <div class="pad">
+                      <div class="primary">[[item.name]]</div>
+                      <div class="shortText">[[item.shortText]]</div>
+                      <div class="longText">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad officiis eligendi soluta in id dolorum accusamus, autem quasi quisquam, non, repudiandae error adipisci sed minima et aliquam doloribus consequatur repellat!</div>
+                    </div>
+                  </div>
+                </div>
+              </template>
             </iron-list>
           </div>
           <div class="card-actions">
@@ -77,7 +136,13 @@
       static get is() {return 'user-view'};
       constructor() {
         super();
-        //costructor content
+        
+        this.set('items',[
+          {name: 'VISA', shortText: 'Terminación 4592'},
+          {name: 'MASTERCARD', shortText: 'Terminación 2319'},
+          {name: 'VISA', shortText: 'Terminación 3458'},
+          {name: 'AMEX', shortText: 'Terminación 0291'}
+        ])
       }
       ready() {
         super.ready();
@@ -103,7 +168,9 @@
       /*
         Métodos Internos
       */
-
+      getClassForItem(item, selected) {
+        return selected ? 'item expanded' : 'item';
+      }
     }
 
     window.customElements.define(UserView.is, UserView);

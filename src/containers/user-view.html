@@ -1,6 +1,4 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
-
-<link rel="lazy-import" href="login-view.html">
 <!-- App Elements -->
 <link rel="import" href="../../bower_components/app-layout/app-toolbar/app-toolbar.html">
 <!-- Paper Elements -->
@@ -10,6 +8,9 @@
 <link rel="import" href="../../bower_components/iron-list/iron-list.html">
 <!-- Own Elements -->
 <link rel="import" href="../custom-styles/materialize-styles.html">
+<!--Lazy imports-->
+<!-- <link rel="import" href="../components/login-component.html">
+ --><link rel="import" href="../components/cards-component.html">
 
 
 <dom-module id="user-view">
@@ -62,7 +63,10 @@
             <div main-title><span class="flow-text">Administrar mis métodos de pago</span></div>
           </app-toolbar>
           <div class="card-content">
-            <login-view></login-view>
+            <div class="card-actions">
+              <paper-button class="card-action-confirm" raised on-click="openModal">Agregar Tarjeta</paper-button>
+            </div>
+            <cards-component show-modal="[[open_modal]]"></cards-component>
           </div>
           <div class="card-actions">
             
@@ -87,22 +91,9 @@
         super.connectedCallback();
         //connectedCallback content
       }
-
-      /*
-        Observadores
-      */
-
-      /*
-        Handlers
-      */
-
-      /*
-        Listeners
-      */
-
-      /*
-        Métodos Internos
-      */
+      openModal(){
+        this.open_modal = !!!this.open_modal
+      }
 
     }
 

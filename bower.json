@@ -28,7 +28,11 @@
     "paper-item": "^2.0.0",
     "paper-datatable-api": "^2.0.10",
     "paper-dialog": "^2.0.0",
-    "granite-qrcode-scanner": "LostInBrittany/granite-qrcode-scanner#^1.6.0"
+    "granite-qrcode-scanner": "LostInBrittany/granite-qrcode-scanner#^1.6.0",
+    "paper-progress": "PolymerElements/paper-progress#^2.0.1",
+    "paper-checkbox": "PolymerElements/paper-checkbox#^2.0.1",
+    "paper-toast": "PolymerElements/paper-toast#^2.0.0",
+    "google-signin": "GoogleWebComponents/google-signin#^2.0.0"
   },
   "resolutions": {
     "polymer": "^2.0.0"

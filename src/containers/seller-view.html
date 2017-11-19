@@ -4,6 +4,7 @@
 <link rel="import" href="../../bower_components/paper-item/paper-item.html">
 <link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="../../bower_components/iron-icons/editor-icons.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
 <link rel="import" href="../../bower_components/paper-datatable-api/paper-datatable-api.html">
 <link rel="import" href="../../bower_components/paper-datatable-api/paper-datatable-api-column.html">
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
@@ -17,6 +18,22 @@
         display: block;
       }
     </style>
+    <iron-ajax
+      id="peticion"
+      method="post"
+      headers='{"Content-Type":"application/json"}'
+      url="https://polython.herokuapp.com/users/login/"
+      handle-as="json"
+      body='{username: "cadillac", password: "polython"}'>
+    </iron-ajax>
+    <iron-ajax
+      auto
+      id="stores_request"
+      headers='{"Content-Type":"application/json"}'
+      url="https://polython.herokuapp.com/stores/list/"
+      handle-as="json"
+      last-response="{{stores}}">
+    </iron-ajax>
     <div class="row">
       <div class="col s12 m10 offset-m1">
         <paper-card animated-shadow>
@@ -27,7 +44,7 @@
             <paper-icon-button icon="add" onclick="addStore.open()"></paper-icon-button>
           </app-toolbar>
           <div class="card-content">
-            <paper-datatable-api data="[[items]]">
+            <paper-datatable-api data="[[stores]]">
               <paper-datatable-api-column header="Nombre" property="name" other-properties='["id"]'>
                 <template>
                   <edit-wrapper content-id="[[otherValues.id]]" value="[[value]]"></edit-wrapper>
@@ -61,6 +78,14 @@
   <script>
     class SellerView extends Polymer.Element {
       static get is() {return 'seller-view'};
+      static get properties() {
+        return {
+          formBody: {
+            type: Object,
+            computed: 'proccessForm(, )'
+          }
+        }
+      }
       static get observers() {
         return [
 
@@ -102,6 +127,9 @@
       /*
         Métodos Internos
       */
+      proccessForm(user, pass) {
+        return {username: user, password: pass}
+      }
 
     }
 

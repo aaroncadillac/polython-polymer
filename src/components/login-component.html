@@ -8,6 +8,7 @@
 <link rel="import" href="../../bower_components/paper-toast/paper-toast.html">
 
 <link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
 <link rel="import" href="../../bower_components/google-signin/google-signin.html">
 
 <link rel="import" href="../../bower_components/slate-font-awesome/slate-font-awesome.html">
@@ -59,16 +60,15 @@
         background-color: var(--paper-grey-200);
       }
     </style>
-    <!-- <iron-ajax
-      id="sign-in"
-      method="post"      
-      url=""
+    <iron-ajax
+      id="peticion"
+      method="post"
+      headers='{"Content-Type":"application/json"}'
+      url="https://polython.herokuapp.com/users/login/"
       handle-as="json"
-      on-response="handleResponse"
-      on-error="handleErrorResponse"
       body='{{formBody}}'
-      loading="{{loading}}">
-    </iron-ajax> -->
+      on-response="createSession">
+    </iron-ajax>
     <div class="col s10 offset-s1">
       <paper-card elevation="1" animated-shadow class="center-login">
           <div class="card-header center-align">
@@ -121,7 +121,6 @@
       }
       static get observers() {
         return [
-
         ]
       }
       constructor() {
@@ -161,6 +160,12 @@
       }
       proccessForm(user, pass) {
         return {username: user, password: pass}
+      }
+      createSession(e) {
+        var response = e.detail.response
+
+        if(response.msg === "ok") sessionStorage.setItem('session', true)
+        else sessionStorage.setItem('session', false)
       }
       validateInputs(){
         this.$.inputUser.validate();

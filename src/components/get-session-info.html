@@ -1,0 +1,66 @@
+<!-- Link imports -->
+
+
+<dom-module id="get-session-info">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    
+  </template>
+  <script>
+    class GetSessionInfo extends Polymer.Element {
+      static get is() {return 'get-session-info'};
+      static get properties() {
+        return {
+          session: {
+            type: Boolean,
+            computed: 'getSession()',
+            notify: true
+          }
+        }
+      }
+      static get observers() {
+        return [
+
+        ]
+      }
+      constructor() {
+        super();
+        //costructor content
+      }
+      ready() {
+        super.ready();
+        //ready content
+      }
+      connectedCallback() {
+        super.connectedCallback();
+        //connectedCallback content
+      }
+
+      /*
+        Observadores
+      */
+
+      /*
+        Handlers
+      */
+
+      /*
+        Listeners
+      */
+
+      /*
+        Métodos Internos
+      */
+      getSession() {
+        return sessionStorage.session || false;
+      }
+
+    }
+
+    window.customElements.define(GetSessionInfo.is, GetSessionInfo);
+  </script>
+</dom-module>

@@ -8,6 +8,7 @@
 <!-- Iron Elements -->
 <link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
 <link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../../bower_components/app-storage/app-indexeddb-mirror/app-indexeddb-mirror.html">
 <!-- Granite Elements -->
 <link rel="import" href="../../bower_components/granite-qrcode-scanner/granite-qrcode-scanner.html">
 <!-- Gold Elements -->
@@ -17,6 +18,7 @@
 <link rel="import" href="../custom-styles/materialize-styles.html">
 
 <link rel="import" href="../components/login-component.html">
+<link rel="import" href="../components/get-session-info.html">
 
 <dom-module id="user-view">
   <template>
@@ -93,78 +95,63 @@
         content: ' [–]';
       }
     </style>
-    <div class="row">
-      <login-component></login-component>
-      <!-- <div class="row hide-on-med-and-down">
-      <div class="col l10 offset-l1">
-        <paper-card elevation="1" animated-shadow>
-          <app-toolbar class="card-toolbar">
-            <div main-title><span class="flow-text">Administrar Perfil</span></div>
-          </app-toolbar>
-          <div class="card-content">
-            <div class="row s12">
-              <paper-input label="Nombre"></paper-input>
-            </div>
-            <div class="row s12">
-              <paper-input label="Usuario"></paper-input>
-            </div>
-            <div class="row s12">
-              <paper-input label="Telefono"></paper-input>
-            </div>
-            <div class="row s12">
-              <paper-input label="Contraseña"></paper-input>
-            </div>
-          </div>
-          <div class="card-actions">
-            <paper-button class="card-action-confirm" raised>Modificar</paper-button>
-          </div>
-        </paper-card>
 
-        <paper-card animated-shadow>
-          <app-toolbar class="card-toolbar">
-            <div main-title><span class="flow-text">Administrar mis métodos de pago</span></div>
-          </app-toolbar>
-          <div class="card-content">
-            <paper-listbox id="list" selectedItem="{{cardSelected}}">
-              <template is="dom-repeat" items="[[items]]">
-                <paper-item on-click="toggleItem">
-                  <iron-icon icon="payment" slot="prefix"></iron-icon>
-                  <div class="pad">
-                    <div class="primary">[[item.name]]</div>
-                    <div class="shortText">[[item.shortText]]</div>
-                    <div class="longText">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad officiis eligendi soluta in id dolorum accusamus, autem quasi quisquam, non, repudiandae error adipisci sed minima et aliquam doloribus consequatur repellat!</div>
-                  </div>
-                </paper-item>
-              </template>
-            </paper-listbox>
-          </div>
-        </paper-card>
-      </div> -->
+    <get-session-info session="{{session}}"></get-session-info>
+    
+    <template is="dom-if" if="[[resolution()]]">
+      <div class="row">
+      <template is="dom-if" if="[[session]]">
+         <div class="row">
+        <div class="col l10 offset-l1">
+          <paper-card elevation="1" animated-shadow>
+            <app-toolbar class="card-toolbar">
+              <div main-title><span class="flow-text">Administrar Perfil</span></div>
+            </app-toolbar>
+            <div class="card-content">
+              <div class="row s12">
+                <paper-input label="Nombre"></paper-input>
+              </div>
+              <div class="row s12">
+                <paper-input label="Usuario"></paper-input>
+              </div>
+              <div class="row s12">
+                <paper-input label="Telefono"></paper-input>
+              </div>
+              <div class="row s12">
+                <paper-input label="Contraseña"></paper-input>
+              </div>
+            </div>
+            <div class="card-actions">
+              <paper-button class="card-action-confirm" raised>Modificar</paper-button>
+            </div>
+          </paper-card>
+        </div>
+      </template>
+      <template is="dom-if" if="[[!session]]">
+        <login-component></login-component>
+      </template>
     </div>
-    <div class="row show-on-medium-and-down">
-      <div class="col s12">
-       <dom-bind>
-         <template>
-            <granite-qrcode-scanner data="{{data}}" active="{{activeQR}}" continuous></granite-qrcode-scanner>
-            <p>Datos: [[data]]</p>
-         </template>
-       </dom-bind>
+    </template>
+    <template is="dom-if" if="[[!resolution()]]">
+      <div class="row show-on-medium-and-down">
+        <div class="col s12">
+         <dom-bind>
+           <template>
+              <granite-qrcode-scanner data="{{data}}" active="{{activeQR}}" continuous></granite-qrcode-scanner>
+              <p>Datos: [[data]]</p>
+           </template>
+         </dom-bind>
+        </div>
       </div>
-    </div>
+    </template>
   </template>
   <script>
     class UserView extends Polymer.Element {
       static get is() {return 'user-view'};
       constructor() {
         super();
-        
-        this.set('items',[
-          {name: 'VISA', shortText: 'Terminación 4592'},
-          {name: 'MASTERCARD', shortText: 'Terminación 2319'},
-          {name: 'VISA', shortText: 'Terminación 3458'},
-          {name: 'AMEX', shortText: 'Terminación 0291'}
-        ])
         this.set('activeQR', true)
+        this.set('width', document.width)
       }
       ready() {
         super.ready();
@@ -178,7 +165,12 @@
       /*
         Observadores
       */
+      resolution() {
+         var width = window.innerWidth;
 
+          if(width > 665) return true
+          else return false
+      }
       /*
         Handlers
       */
@@ -189,6 +181,7 @@
       toggleItem() {
         this.cardSelected.active = !!!this.cardSelected.active
       }
+    }
     window.customElements.define(UserView.is, UserView);
   </script>
 </dom-module>                       

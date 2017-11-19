@@ -86,8 +86,8 @@
       }
     </style>
     <div class="row">
-      <!-- <login-component></login-component> -->
-      <div class="col s10 offset-s1">
+      <login-component></login-component>
+      <!-- <div class="col s10 offset-s1">
         <paper-card elevation="1" animated-shadow>
           <app-toolbar class="card-toolbar">
             <div main-title><span class="flow-text">Administrar Perfil</span></div>
@@ -136,7 +136,7 @@
             </paper-listbox>
           </div>
         </paper-card>
-      </div>
+      </div> -->
     </div>
   </template>
   <script>
@@ -160,22 +160,6 @@
         super.connectedCallback();
         //connectedCallback content
       }
-
-      /*
-        Observadores
-      */
-
-      /*
-        Handlers
-      */
-
-      /*
-        Listeners
-      */
-
-      /*
-        Métodos Internos
-      */
       getClassForItem(item, selected) {
         return selected ? 'item expanded' : 'item';
       }

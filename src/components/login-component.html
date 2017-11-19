@@ -8,7 +8,9 @@
 <link rel="import" href="../../bower_components/paper-toast/paper-toast.html">
 
 <link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
-<link rel="import" href="../../bower_components/slate-font-awesome/slate-font-awesome-min.html">
+<link rel="import" href="../../bower_components/google-signin/google-signin.html">
+
+<link rel="import" href="../../bower_components/slate-font-awesome/slate-font-awesome.html">
 
 <!-- <link rel="import" href="../../custom-style/materialize.html">
  -->
@@ -22,22 +24,18 @@
           width: 90%;
           margin: 15px auto;
           display: block;
-          clear: both;
-        };
+          clear: both;        
+        };        
       }
       .center-login {
         top: 50%;
         left: 50%;
         transform: translate(-50%, 0);
-        min-width: 70%;
+        min-width: 40%;
       }      
       paper-checkbox.save-session {
         --paper-checkbox-checked-color: var(--paper-blue-500);
         margin: 15px 0 5px 0;
-      }
-      .registration-button {
-        color: var(--paper-green-500);
-        background-color: var(--paper-grey-200);
       }
       .card-header {
         background-color: var(--paper-grey-100);
@@ -52,14 +50,10 @@
         background-color: var(--paper-blue-500);
         color: white;
       }
-      .button-fb {
-        background-color: #3b5998;
-        color: white;
-      }  
-      .button-google {
-        background-color: #dd4b39;
-        color: white;
-      } 
+      google-signin {
+        width: 90%;
+        margin-left: 20px;
+      }
       .card-actions {
         text-align: center;
         background-color: var(--paper-grey-200);
@@ -92,9 +86,13 @@
                 <iron-icon slot="suffix" icon="clear" on-click="__clearPass"></iron-icon>
               </paper-input>
               <paper-checkbox class="save-session" checked>Recuerdame</paper-checkbox>
-              <paper-button raised class="button-login center-align" id="send"><iron-icon icon="send"></iron-icon> Iniciar Sesión</paper-button>
-              <paper-button raised class="button-google center-align" id=""><i class="fa fa-google-plus-square fa-2x"></i> Iniciar con Google</paper-button>
-              <paper-button raised class="button-fb center-align" id=""><i class="fa fa-facebook-official fa-2x"></i> Iniciar con Facebook</paper-button>
+              <paper-button raised class="button-login center-align" id="send">Iniciar Sesión</paper-button>
+              <google-signin 
+                label-signin="Sign-in" 
+                width="standar"
+                client-id="937312064788-bega5brlj44ul41dkiflvv724mq52qlf.apps.googleusercontent.com"
+                is-authorized="{{isAuthorized}}">
+              </google-signin>
             </form>
           </div>
           <template is="dom-if" if="{{loading}}">

@@ -11,6 +11,8 @@
 <!-- Own Elements -->
 <link rel="import" href="../custom-styles/materialize-styles.html">
 
+<link rel="import" href="../components/login-component.html">
+
 <dom-module id="user-view">
   <template>
     <style include="materialize-styles">
@@ -36,39 +38,43 @@
     </style>
     <div class="row">
       <div class="col s10 offset-s1">
-        <paper-card elevation="1" animated-shadow>
-          <app-toolbar class="perfil-toolbar">
-            <div main-title><span class="flow-text">Administrar Perfil</span></div>
-          </app-toolbar>
-          <div class="card-content">
-            <div class="row s12">
-              <paper-input label="Nombre"></paper-input>
+        <template is="dom-if" if="[[getStateUser(userStatus, 0)]]">
+        </template>
+        <template is="dom-if" if="[[getStateUser(userStatus, 1)]]">
+          <paper-card elevation="1" animated-shadow>
+            <app-toolbar class="perfil-toolbar">
+              <div main-title><span class="flow-text">Administrar Perfil</span></div>
+            </app-toolbar>
+            <div class="card-content">
+              <div class="row s12">
+                <paper-input label="Nombre"></paper-input>
+              </div>
+              <div class="row s12">
+                <paper-input label="Usuario"></paper-input>
+              </div>
+              <div class="row s12">
+                <paper-input label="Contraseña"></paper-input>
+              </div>
             </div>
-            <div class="row s12">
-              <paper-input label="Usuario"></paper-input>
+            <div class="card-actions">
+              <paper-button class="card-action-confirm" raised>Modificar</paper-button>
             </div>
-            <div class="row s12">
-              <paper-input label="Contraseña"></paper-input>
-            </div>
-          </div>
-          <div class="card-actions">
-            <paper-button class="card-action-confirm" raised>Modificar</paper-button>
-          </div>
-        </paper-card>
+          </paper-card>
 
-        <paper-card animated-shadow>
-          <app-toolbar class="perfil-toolbar">
-            <div main-title><span class="flow-text">Administrar mis métodos de pago</span></div>
-          </app-toolbar>
-          <div class="card-content">
-            <iron-list>
+          <paper-card animated-shadow>
+            <app-toolbar class="perfil-toolbar">
+              <div main-title><span class="flow-text">Administrar mis métodos de pago</span></div>
+            </app-toolbar>
+            <div class="card-content">
+              <iron-list>
+                
+              </iron-list>
+            </div>
+            <div class="card-actions">
               
-            </iron-list>
-          </div>
-          <div class="card-actions">
-            
-          </div>
-        </paper-card>
+            </div>
+          </paper-card>
+        </template>
       </div>
     </div>
   </template>

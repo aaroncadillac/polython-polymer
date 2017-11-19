@@ -23,7 +23,8 @@
     "paper-card": "PolymerElements/paper-card#^2.0.0",
     "iron-list": "^2.0.11",
     "login-fire": "convoo/login-fire#^0.1.5",
-    "gold-cc-cvc-input": "PolymerElements/gold-cc-cvc-input#^2.0.1"
+    "gold-cc-cvc-input": "PolymerElements/gold-cc-cvc-input#^2.0.1",
+    "gold-cc-input": "PolymerElements/gold-cc-input#^2.0.0"
   },
   "resolutions": {
     "polymer": "^2.0.0"

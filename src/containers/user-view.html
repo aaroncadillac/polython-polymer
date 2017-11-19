@@ -1,24 +1,80 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
 <link rel="lazy-import" href="login-view.html">
+<!-- App Elements -->
+<link rel="import" href="../../bower_components/app-layout/app-toolbar/app-toolbar.html">
+<!-- Paper Elements -->
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<!-- Iron Elements -->
+<link rel="import" href="../../bower_components/iron-list/iron-list.html">
+<!-- Own Elements -->
+<link rel="import" href="../custom-styles/materialize-styles.html">
+
 
 <dom-module id="user-view">
   <template>
-    <style>
+    <style include="materialize-styles">
       :host {
         display: block;
       }
+      .perfil-toolbar {
+        background-color: var(--paper-grey-100);
+      }
+      .card-action-confirm {
+        background-color: var(--paper-indigo-400);
+        color: white;
+      }
+      .secondary-form-button {
+        background-color: var(--paper-grey-300)
+      }
+      .card-actions{
+        text-align: right
+      }
+      paper-card {
+        margin-bottom: 30px;
+      }
     </style>
-    <login-view></login-view>
+    <div class="row">
+      <div class="col s10 offset-s1">
+        <paper-card elevation="1" animated-shadow>
+          <app-toolbar class="perfil-toolbar">
+            <div main-title><span class="flow-text">Administrar Perfil</span></div>
+          </app-toolbar>
+          <div class="card-content">
+            <div class="row s12">
+              <paper-input label="Nombre"></paper-input>
+            </div>
+            <div class="row s12">
+              <paper-input label="Usuario"></paper-input>
+            </div>
+            <div class="row s12">
+              <paper-input label="Contraseña"></paper-input>
+            </div>
+          </div>
+          <div class="card-actions">
+            <paper-button class="card-action-confirm" raised>Modificar</paper-button>
+          </div>
+        </paper-card>
+
+        <paper-card animated-shadow>
+          <app-toolbar class="perfil-toolbar">
+            <div main-title><span class="flow-text">Administrar mis métodos de pago</span></div>
+          </app-toolbar>
+          <div class="card-content">
+            <login-view></login-view>
+          </div>
+          <div class="card-actions">
+            
+          </div>
+        </paper-card>
+      </div>
+    </div>
   </template>
 
   <script>
     class UserView extends Polymer.Element {
       static get is() {return 'user-view'};
-      static get observers() {
-        return [
-
-        ]
-      }
       constructor() {
         super();
         //costructor content

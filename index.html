@@ -15,19 +15,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <meta name="generator" content="Polymer Starter Kit">
     <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-    <title>My App</title>
+    <title>Pay App</title>
     <meta name="description" content="My App description">
-
-    <!--
-      The `<base>` tag below is present to support two advanced deployment options:
-      1) Differential serving. 2) Serving from a non-root path.
-
-      Instead of manually editing the `<base>` tag yourself, you should generally either:
-      a) Add a `basePath` property to the build configuration in your `polymer.json`.
-      b) Use the `--base-path` command-line option for `polymer build`.
-
-      Note: If you intend to serve from a non-root path, see [polymer-root-path] below.
-    -->
     <base href="/">
 
     <link rel="icon" href="images/favicon.ico">
@@ -76,9 +65,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <script src="bower_components/webcomponentsjs/webcomponents-loader.js"></script>
 
     <!-- Load your application shell -->
+    <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
     <link rel="import" href="src/pay-app.html">
 
-    <!-- Add any global styles for body, document, etc. -->
     <style>
       body {
         margin: 0;
@@ -94,6 +83,5 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <noscript>
       Please enable JavaScript to view this website.
     </noscript>
-    <!-- Built with love using Polymer Starter Kit -->
   </body>
 </html>

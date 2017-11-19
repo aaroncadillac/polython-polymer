@@ -4,25 +4,19 @@
 <!-- Paper Elements -->
 <link rel="import" href="../../bower_components/paper-card/paper-card.html">
 <link rel="import" href="../../bower_components/paper-input/paper-input.html">
-<link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <!-- Iron Elements -->
 <link rel="import" href="../../bower_components/iron-list/iron-list.html">
-<link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
 <!-- Own Elements -->
 <link rel="import" href="../custom-styles/materialize-styles.html">
-<!--Lazy imports-->
-<!-- <link rel="import" href="../components/login-component.html">
- <!--Gold Elements-->
-<link rel="import" href="../../bower_components/gold-cc-input/gold-cc-input.html">
-<link rel="import" href="../../bower_components/gold-cc-cvc-input/gold-cc-cvc-input.html"><!-- 
-<link rel="import" href="../../bower_components/gold-cc-expiration-input/gold-cc-expiration-input.html"> -->
-
 
 <dom-module id="user-view">
   <template>
     <style include="materialize-styles">
       :host {
         display: block;
+      }
+      .perfil-toolbar {
+        background-color: var(--paper-grey-100);
       }
       .card-action-confirm {
         background-color: var(--paper-indigo-400);
@@ -34,58 +28,14 @@
       .card-actions{
         text-align: right
       }
-      .item {
-        @apply --layout-horizontal;
-        padding: 20px;
-        background-color: white;
-        border: 1px solid #ddd;
-        cursor: pointer;
-        margin-bottom: 10px;
-      }
-      .pad {
-        padding: 0 16px;
-        @apply --layout-flex;
-        @apply --layout-vertical);
-      }
-
-      .primary {
-        font-size: 16px;
-        font-weight: bold;
-      }
-
-      .shortText, .longText {
-        font-size: 14px;
-      }
-
-      .longText {
-        color: gray;
-        display: none;
-      }
-
-      .item:hover .shortText::after {
-        content: ' [+]';
-        color: gray;
-      }
-
-      .item.expanded:hover .shortText::after {
-        content: '';
-      }
-
-      .item.expanded .longText {
-        display: block;
-      }
-
-      .item.expanded:hover .longText::after {
-        content: ' [–]';
-      }
       paper-card {
         margin-bottom: 30px;
       }
     </style>
     <div class="row">
-      <div class="col s12 m10 offset-m1">
+      <div class="col s10 offset-s1">
         <paper-card elevation="1" animated-shadow>
-          <app-toolbar class="card-toolbar">
+          <app-toolbar class="perfil-toolbar">
             <div main-title><span class="flow-text">Administrar Perfil</span></div>
           </app-toolbar>
           <div class="card-content">
@@ -105,28 +55,12 @@
         </paper-card>
 
         <paper-card animated-shadow>
-          <app-toolbar class="card-toolbar">
+          <app-toolbar class="perfil-toolbar">
             <div main-title><span class="flow-text">Administrar mis métodos de pago</span></div>
           </app-toolbar>
           <div class="card-content">
-            <iron-list id="list" items="[[items]]" as="item" selection-enabled multi-selection>
-              <template>
-                <div>
-                  <div class$="[[getClassForItem(item, selected)]]" tabindex$="[[tabIndex]]">
-                    <iron-icon icon="payment" slot="prefix"></iron-icon>  
-                    <div class="pad">
-                      <div class="primary">[[item.name]]</div>
-                      <div class="shortText">[[item.shortText]]</div>
-                      <div class="longText">
-                        <gold-cc-input></gold-cc-input>
-                        <gold-cc-cvc-input></gold-cc-cvc-input>
-                        <gold-cc-expiration-input label="Date"></gold-cc-expiration-input>
-                        <paper-button on-click="addCard">Agregar</paper-button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </template>
+            <iron-list>
+              
             </iron-list>
           </div>
           <div class="card-actions">
@@ -136,29 +70,22 @@
       </div>
     </div>
   </template>
-
   <script>
     class UserView extends Polymer.Element {
       static get is() {return 'user-view'};
       constructor() {
         super();
-        
-        this.set('items', [
-          {name: 'VISA', shortText: 'Terminación 6839'},
-          {name: 'MASTERCARD', shortText: 'Terminación 6239'},
-          {name: 'VISA', shortText: 'Terminación 0182'},
-          {name: 'AMEX', shortText: 'Terminación 3421'},
-          {name: 'MASTERCARD', shortText: 'Terminación 9823'},
-        ])
+        //costructor content
       }
       ready() {
         super.ready();
-        
+        //ready content
       }
       connectedCallback() {
         super.connectedCallback();
         //connectedCallback content
       }
+
       /*
         Observadores
       */
@@ -174,9 +101,6 @@
       /*
         Métodos Internos
       */
-      getClassForItem(item, selected) {
-        return selected ? 'item expanded' : 'item';
-      }
 
     }
 

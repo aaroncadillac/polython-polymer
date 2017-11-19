@@ -1,16 +1,21 @@
-<link rel="import" href="../../bower_components/polymer/polymer-element.html">
-<dom-module id="seller-view">
+
+<dom-module id="user-container">
   <template>
     <style>
       :host {
         display: block;
       }
     </style>
-    Seller view
+    
   </template>
   <script>
-    class SellerView extends Polymer.Element {
-      static get is() {return 'seller-view'};
+    class UserContainer extends Polymer.Element {
+      static get is() {return 'user-container'};
+      static get properties() {
+        return {
+          
+        }
+      }
       static get observers() {
         return [
 
@@ -47,6 +52,6 @@
 
     }
 
-    window.customElements.define(SellerView.is, SellerView);
+    window.customElements.define(UserContainer.is, UserContainer);
   </script>
 </dom-module>

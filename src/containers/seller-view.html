@@ -21,6 +21,10 @@
           </app-toolbar>
           <div class="card-content">
             <paper-listbox>
+              <template is="dom-repeat" items="[[items]]">
+                
+              </template>
+            </paper-listbox>
           </div>
           <div class="card-actions">
             
@@ -39,7 +43,10 @@
       }
       constructor() {
         super();
-        //costructor content
+        
+        this.set('items', [
+          {}
+        ])
       }
       ready() {
         super.ready();

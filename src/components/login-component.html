@@ -5,16 +5,64 @@
 <link rel="import" href="../../bower_components/paper-input/paper-input.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../bower_components/paper-checkbox/paper-checkbox.html">
+<link rel="import" href="../../bower_components/paper-toast/paper-toast.html">
 
 <link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../../bower_components/slate-font-awesome/slate-font-awesome-min.html">
 
-<link rel="import" href="../../custom-style/materialize.html">
-
+<!-- <link rel="import" href="../../custom-style/materialize.html">
+ -->
 <dom-module id="login-component">
   <template>
-    <style>
+    <style include="slate-font-awesome">
       :host {
         display: block;
+        --drawer-color: #c9c9c9;
+        --paper-button: {
+          width: 90%;
+          margin: 15px auto;
+          display: block;
+          clear: both;
+        };
+      }
+      .center-login {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, 0);
+        min-width: 70%;
+      }      
+      paper-checkbox.save-session {
+        --paper-checkbox-checked-color: var(--paper-blue-500);
+        margin: 15px 0 5px 0;
+      }
+      .registration-button {
+        color: var(--paper-green-500);
+        background-color: var(--paper-grey-200);
+      }
+      .card-header {
+        background-color: var(--paper-grey-100);
+        padding: 5px 25px;
+        color: #252525;
+      }
+      paper-button {
+        text-align: center;
+        text-transform: none;
+      }     
+      .button-login {
+        background-color: var(--paper-blue-500);
+        color: white;
+      }
+      .button-fb {
+        background-color: #3b5998;
+        color: white;
+      }  
+      .button-google {
+        background-color: #dd4b39;
+        color: white;
+      } 
+      .card-actions {
+        text-align: center;
+        background-color: var(--paper-grey-200);
       }
     </style>
     <!-- <iron-ajax
@@ -27,38 +75,39 @@
       body='{{formBody}}'
       loading="{{loading}}">
     </iron-ajax> -->
-    <paper-card elevation="2" animated-shadow="true" class="center-center">
-        <div class="card-header center-align">
-          <h4>Ingrese a su cuenta</h4>
-        </div>
-        <div class="card-content">
-          <form>
-            <paper-input id="inputUser" label="Usuario" required auto-validate error-message="Usuario inválido" value="{{appUser}}">
-              <iron-icon icon="social:person" slot="prefix"></iron-icon>
-              <iron-icon slot="suffix" icon="clear" on-click="__clearUser"></iron-icon>
-            </paper-input>
-            <paper-input id="inputPass" label="Contraseña" type="{{passType(passToggle)}}" required auto-validate error-message="Contraseña inválida" value="{{appPass}}">
-              <iron-icon icon="icons:lock-outline" slot="prefix"></iron-icon>
-              <iron-icon slot="suffix" icon="visibility" id="seepass"></iron-icon>
-              <iron-icon slot="suffix" icon="clear" on-click="__clearPass"></iron-icon>
-            </paper-input>
-            <paper-checkbox class="save-session" checked>Recuerdame</paper-checkbox>
-            <paper-button raised class="button-login center-align" id="send"><iron-icon icon="send"></iron-icon> Iniciar Sesión</paper-button>
-            <paper-button raised class="button-login center-align" id=""><iron-icon icon="vaadin:google-plus"></iron-icon> Iniciar con Google</paper-button>
-            <paper-button raised class="button-login center-align" id=""><iron-icon icon="vaadin:facebook"></iron-icon> Iniciarcon Facebook</paper-button>
-          </form>
-        </div>
-        <template is="dom-if" if="{{loading}}">
-          <paper-progress indeterminate></paper-progress>
-        </template>
-        <div class="card-actions" id="containerNotif">
-          <paper-toast id="loginNotification" class="fit-bottom" duration="2000"></paper-toast>
-        </div>
+    <div class="col s10 offset-s1">
+      <paper-card elevation="1" animated-shadow class="center-login">
+          <div class="card-header center-align">
+            <h4>Ingrese a su cuenta</h4>
+          </div>
+          <div class="card-content">
+            <form>
+              <paper-input id="inputUser" label="Usuario" required auto-validate error-message="Usuario inválido" value="{{appUser}}">
+                <i class="fa fa-user fa-2x"></i>
+                <iron-icon slot="suffix" icon="clear" on-click="__clearUser"></iron-icon>
+              </paper-input>
+              <paper-input id="inputPass" label="Contraseña" type="{{passType(passToggle)}}" required auto-validate error-message="Contraseña inválida" value="{{appPass}}">
+                <i class="fa fa-lock fa-2x"></i>
+                <iron-icon slot="suffix" icon="visibility" id="seepass"></iron-icon>
+                <iron-icon slot="suffix" icon="clear" on-click="__clearPass"></iron-icon>
+              </paper-input>
+              <paper-checkbox class="save-session" checked>Recuerdame</paper-checkbox>
+              <paper-button raised class="button-login center-align" id="send"><iron-icon icon="send"></iron-icon> Iniciar Sesión</paper-button>
+              <paper-button raised class="button-google center-align" id=""><i class="fa fa-google-plus-square fa-2x"></i> Iniciar con Google</paper-button>
+              <paper-button raised class="button-fb center-align" id=""><i class="fa fa-facebook-official fa-2x"></i> Iniciar con Facebook</paper-button>
+            </form>
+          </div>
+          <template is="dom-if" if="{{loading}}">
+            <paper-progress indeterminate></paper-progress>
+          </template>
+          <div class="card-actions" id="containerNotif">
+            <paper-toast id="loginNotification" class="fit-bottom" duration="2000"></paper-toast>
+          </div>
       </paper-card>
+    </div>
     <template is="dom-if" if="{{loading}}">
       <paper-progress indeterminate></paper-progress>
-    </template>
-    
+    </template>    
   </template>
   <script>
     class LoginComponent extends Polymer.Element {
@@ -86,9 +135,6 @@
       ready() {
         super.ready();
         this.$.loginNotification.fitInto = this.$.containerNotif;
-        this.$.menu.addEventListener('click', () => {
-          this.$.sidebar.toggle();
-        });
         this.$.send.addEventListener('click', e => this.__enviarFormulario(e));
         this.$.seepass.addEventListener('mousedown', e => this.__seePass(e))
         this.$.seepass.addEventListener('mouseup', e => this.__seePass(e))

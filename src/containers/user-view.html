@@ -1,4 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<link rel="lazy-import" href="login-view.html">
 <!-- App Elements -->
 <link rel="import" href="../../bower_components/app-layout/app-toolbar/app-toolbar.html">
 <!-- Paper Elements -->
@@ -9,6 +11,7 @@
 <link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
 <!-- Own Elements -->
 <link rel="import" href="../custom-styles/materialize-styles.html">
+
 
 <dom-module id="user-view">
   <template>
@@ -117,6 +120,7 @@
                 </div>
               </template>
             </iron-list>
+            <login-view></login-view>
           </div>
           <div class="card-actions">
             
@@ -125,6 +129,7 @@
       </div>
     </div>
   </template>
+
   <script>
     class UserView extends Polymer.Element {
       static get is() {return 'user-view'};
@@ -141,7 +146,7 @@
       }
       ready() {
         super.ready();
-        //ready content
+        
       }
       connectedCallback() {
         super.connectedCallback();

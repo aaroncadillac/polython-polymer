@@ -8,6 +8,9 @@
 <link rel="import" href="../../bower_components/iron-list/iron-list.html">
 <link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
 <link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
+<!-- Gold Elements -->
+<link rel="import" href="../../bower_components/gold-cc-input/gold-cc-input.html">
+<link rel="import" href="../../bower_components/gold-cc-cvc-input/gold-cc-cvc-input.html">
 <!-- Own Elements -->
 <link rel="import" href="../custom-styles/materialize-styles.html">
 
@@ -114,7 +117,7 @@
             </app-toolbar>
             <div class="card-content">
               <iron-list>
-                
+
               </iron-list>
             </div>
             <div class="card-actions">
@@ -135,7 +138,10 @@
                     <div class="pad">
                       <div class="primary">[[item.name]]</div>
                       <div class="shortText">[[item.shortText]]</div>
-                      <div class="longText">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad officiis eligendi soluta in id dolorum accusamus, autem quasi quisquam, non, repudiandae error adipisci sed minima et aliquam doloribus consequatur repellat!</div>
+                      <div class="longText">
+                        <gold-cc-input></gold-cc-input>
+                        <gold-cc-cvc-input></gold-cc-cvc-input>
+                      </div>
                     </div>
                   </div>
                 </div>

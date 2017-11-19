@@ -4,8 +4,8 @@
 <!-- Paper Elements -->
 <link rel="import" href="../../bower_components/paper-card/paper-card.html">
 <link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/paper-listbox/paper-listbox.html">
 <!-- Iron Elements -->
-<link rel="import" href="../../bower_components/iron-list/iron-list.html">
 <link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
 <link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
 <!-- Gold Elements -->
@@ -21,9 +21,6 @@
     <style include="materialize-styles">
       :host {
         display: block;
-      }
-      .perfil-toolbar {
-        background-color: var(--paper-grey-100);
       }
       .card-action-confirm {
         background-color: var(--paper-indigo-400);
@@ -89,6 +86,7 @@
     </style>
     <div class="row">
       <div class="col s10 offset-s1">
+<<<<<<< HEAD
         <template is="dom-if" if="[[getStateUser(userStatus, 0)]]">
         </template>
         <template is="dom-if" if="[[getStateUser(userStatus, 1)]]">
@@ -109,6 +107,24 @@
             </div>
             <div class="card-actions">
               <paper-button class="card-action-confirm" raised>Modificar</paper-button>
+=======
+        <paper-card elevation="1" animated-shadow>
+          <app-toolbar class="card-toolbar">
+            <div main-title><span class="flow-text">Administrar Perfil</span></div>
+          </app-toolbar>
+          <div class="card-content">
+            <div class="row s12">
+              <paper-input label="Nombre"></paper-input>
+            </div>
+            <div class="row s12">
+              <paper-input label="Usuario"></paper-input>
+            </div>
+            <div class="row s12">
+              <paper-input label="Telefono"></paper-input>
+            </div>
+            <div class="row s12">
+              <paper-input label="Contraseña"></paper-input>
+>>>>>>> 66de9d044eadd5b8fdcf0a0ef49bb47be1150dd8
             </div>
           </paper-card>
           <paper-card animated-shadow>
@@ -126,12 +142,12 @@
           </paper-card>
         </template>
         <paper-card animated-shadow>
-          <app-toolbar class="perfil-toolbar">
+          <app-toolbar class="card-toolbar">
             <div main-title><span class="flow-text">Administrar mis métodos de pago</span></div>
           </app-toolbar>
           <div class="card-content">
-            <iron-list id="list" items="[[items]]" selection-enabled multi-selection>
-              <template>
+            <paper-listbox id="list">
+              <template is="dom-repeat" items="[[items]]">
                 <div>
                   <div class$="[[getClassForItem(item, selected)]]" tabindex$="[[tabIndex]]">
                     <iron-icon icon="payment" slot="prefix"></iron-icon>
@@ -146,10 +162,10 @@
                   </div>
                 </div>
               </template>
-            </iron-list>
+            </paper-listbox>
           </div>
           <div class="card-actions">
-            
+            <paper-button class="card-action-confirm" raised>Agregar tarjeta</paper-button>
           </div>
         </paper-card>
       </div>
